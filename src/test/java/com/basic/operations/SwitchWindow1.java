@@ -1,11 +1,13 @@
 package com.basic.operations;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.util.Set;
@@ -17,8 +19,9 @@ public class SwitchWindow1 {
 
     @Before
     public void setUp() throws Exception {
-        driver = new FirefoxDriver();
-        baseUrl = "http://letskodeit.teachable.com/pages/practice";
+        WebDriverManager.chromedriver().setup();
+        driver = new ChromeDriver();
+        baseUrl = "https://courses.letskodeit.com/practice";
 
         // Maximize the browser's window
         driver.manage().window().maximize();
@@ -45,8 +48,8 @@ public class SwitchWindow1 {
             if (!handle.equals(parentHandle)) {
                 driver.switchTo().window(handle);
                 Thread.sleep(2000);
-                WebElement searchBox = driver.findElement(By.id("search-courses"));
-                searchBox.sendKeys("python");
+                WebElement searchBox = driver.findElement(By.xpath("//*[@id=\"navbar-inverse-collapse\"]/div/div/a"));
+                searchBox.click();
                 Thread.sleep(2000);
                 driver.close();
                 break;
@@ -54,12 +57,13 @@ public class SwitchWindow1 {
         }
         // Switch back to the parent window
         driver.switchTo().window(parentHandle);
+        Thread.sleep(6000);
         driver.findElement(By.id("name")).sendKeys("Test Successful");
     }
 
     @After
     public void tearDown() throws Exception {
         Thread.sleep(2000);
-        driver.quit();
+//        driver.quit();
     }
 }

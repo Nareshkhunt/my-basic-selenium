@@ -23,7 +23,7 @@ public class KeyPressDemo1 {
         WebDriverManager.chromedriver().setup();
         driver=new ChromeDriver();
         //driver = new FirefoxDriver();
-        baseUrl = "https://letskodeit.teachable.com/p/practice";
+        baseUrl = "https://www.letskodeit.com/practice";
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }

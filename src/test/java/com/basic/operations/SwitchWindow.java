@@ -1,11 +1,13 @@
 package com.basic.operations;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.util.Set;
@@ -17,8 +19,9 @@ public class SwitchWindow {
 
     @Before
     public void setUp() throws Exception {
-        driver = new FirefoxDriver();
-        baseUrl = "http://letskodeit.teachable.com/pages/practice";
+        WebDriverManager.chromedriver().setup();
+        driver = new ChromeDriver();
+        baseUrl = "https://courses.letskodeit.com/practice";
 
         // Maximize the browser's window
         driver.manage().window().maximize();
@@ -42,6 +45,8 @@ public class SwitchWindow {
 
         // Get all handles
         Set<String> handles = driver.getWindowHandles();
+        System.out.println(handles.size());
+
 
         // Switching between handles
         for (String handle: handles) {

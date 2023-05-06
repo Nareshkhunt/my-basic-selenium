@@ -1,10 +1,12 @@
 package com.basic.operations.keypress;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 
@@ -16,7 +18,9 @@ public class KeyPressDemo3 {
 
     @Before
     public void setUp() throws Exception {
-        driver = new FirefoxDriver();
+        WebDriverManager.chromedriver().setup();
+        driver=new ChromeDriver();
+        //driver = new FirefoxDriver(); selenium 2.53 will run with firefox <58 version
         baseUrl = "https://letskodeit.teachable.com/p/practice";
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);

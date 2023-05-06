@@ -1,11 +1,13 @@
 package com.basic.operations;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.util.List;
@@ -17,7 +19,8 @@ public class AutocompleteSuggest {
 
     @Before
     public void setUp() throws Exception {
-        driver = new FirefoxDriver();
+        WebDriverManager.chromedriver().setup();
+        driver = new ChromeDriver();
         baseUrl = "http://www.southwest.com/";
 
         // Maximize the browser's window
@@ -31,11 +34,11 @@ public class AutocompleteSuggest {
         String searchingText = "New York/Newark, NJ - EWR";
         String partialText = "New York";
 
-        WebElement text = driver.findElement(By.id("air-city-departure"));
+        WebElement text = driver.findElement(By.id("LandingAirBookingSearchForm_originationAirportCode"));
         text.sendKeys(partialText);
 
-        WebElement element = driver.findElement(By.id("air-city-departure-menu"));
-        List<WebElement> results = element.findElements(By.tagName("li"));
+        WebElement element = driver.findElement(By.cssSelector(".list-box--input"));
+        List<WebElement> results = element.findElements(By.cssSelector("form-control--message"));
         int size = results.size();
         System.out.println(results);
         System.out.println("The size of the list is: " + size);

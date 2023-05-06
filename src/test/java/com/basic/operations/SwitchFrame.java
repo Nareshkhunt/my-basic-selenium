@@ -1,11 +1,14 @@
 package com.basic.operations;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.util.concurrent.TimeUnit;
@@ -16,8 +19,10 @@ public class SwitchFrame {
 
     @Before
     public void setUp() throws Exception {
-        driver = new FirefoxDriver();
-        baseUrl = "https://letskodeit.teachable.com/pages/practice";
+        WebDriverManager.chromedriver().setup();
+        driver= new ChromeDriver();
+        baseUrl = "https://www.letskodeit.com/practice";
+
 
         // Maximize the browser's window
         driver.manage().window().maximize();
@@ -27,21 +32,25 @@ public class SwitchFrame {
 
     @Test
     public void test() throws InterruptedException {
-        Thread.sleep(3000);
+        Thread.sleep(6000);
         // Switch to frame by Id
         driver.switchTo().frame("courses-iframe");
         // Switch to frame by name
         //driver.switchTo().frame("iframe-name");
         // Switch to frame by numbers
-        //driver.switchTo().frame(0);
+//        driver.switchTo().frame(0);
+        Thread.sleep(3000);
 
-        WebElement searchBox = driver.findElement(By.id("search-courses"));
+        WebElement searchBox = driver.findElement(By.id("search"));
+//        searchBox.click();
         searchBox.sendKeys("python");
+//        searchBox.click();
+        searchBox.sendKeys(Keys.ENTER);
 
-        driver.switchTo().defaultContent();
-        Thread.sleep(6000);
-        driver.findElement(By.id("name")).sendKeys("Test Successful");
-    }
+//        driver.switchTo().defaultContent();
+//        Thread.sleep(6000);
+//        driver.findElement(By.id("name")).sendKeys("Test Successful");
+   }
 
     @After
     public void tearDown() throws Exception {
